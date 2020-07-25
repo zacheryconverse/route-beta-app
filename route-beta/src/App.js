@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 // import ReactDOM from 'react-dom';
-import logo from "./logo.svg";
-import "./App.css";
-import Header from "./Header.jsx";
+import logo from './logo.svg';
+import './App.css';
+import Header from './Header';
 import List from './List';
 
 class App extends React.Component {
@@ -14,7 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    fetch("/items")
+    fetch('/items')
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -22,7 +22,7 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log("err", err);
+        console.log('err', err);
       });
   }
 
@@ -31,7 +31,7 @@ class App extends React.Component {
       <div className="App">
         <Header />
         <header className="App-header">
-          <List items={this.state.items}/>
+          <List items={this.state.items} />
           <img src={logo} className="App-logo" alt="logo" />
         </header>
       </div>

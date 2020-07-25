@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
+
 mongoose.connect('mongodb://localhost/beta', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -6,21 +9,21 @@ mongoose.connect('mongodb://localhost/beta', {
 
 const db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', () => {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
+db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
-const itemSchema = mongoose.Schema({
-  move_number: Number,
-  move_description: String
+const ItemSchema = new Schema({
+  moveId: Number,
+  move: String,
 });
 
-const Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', ItemSchema);
 
-module.exports.selectAll = {
+module.exports = {
   Item,
 };

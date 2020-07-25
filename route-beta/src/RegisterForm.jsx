@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 function RegisterForm(props) {
-  const [ state, setState ] = useState({
+  const [state, setState] = useState({
     email: '',
     password: '',
-  })
+  });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      [id]: value
-    }))
-  }
+      [id]: value,
+    }));
+  };
 
   return (
     <div className="card co-12 col-lg-4 login-card mt-2 hv-center">
@@ -55,6 +55,6 @@ function RegisterForm(props) {
       </form>
     </div>
   );
-};
+}
 
 export default RegisterForm;
