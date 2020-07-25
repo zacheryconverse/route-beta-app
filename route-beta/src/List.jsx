@@ -21,7 +21,7 @@ const List = (props) => {
 
   const sendMoveToServer = () => {
     if (state.move.length) {
-      fetch('/list', ("move":state.move))
+      fetch('/moves', ("move":state.move))
     }
   }
 

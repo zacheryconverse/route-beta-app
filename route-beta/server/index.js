@@ -1,12 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const router = express.Router();
+const { Item } =require('./index');
 const { selectAll, addMove } = require('./database/controllers');
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/moves', router);
 
 // app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(express.static('public'));
@@ -18,6 +20,23 @@ app.use(express.static('public'));
 //   ]);
 // });
 
+app.get('/', (req, res) => {
+  selectAll((err, data) => {
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+router.route('/:id').get((req, res) => {
+  let id = req.params.id;
+  Item.findById(id, (err, move) => {
+    res.json(move);
+  });
+});
+
 app.get('/items', (req, res) => {
   selectAll((err, data) => {
     if(err) {
@@ -28,7 +47,7 @@ app.get('/items', (req, res) => {
   });
 });
 
-app.post('/list', (req, res) => {
+app.post('/moves', (req, res) => {
   addMove((err, data) => {
     if(err) {
       res.sendStatus(500);

@@ -10,8 +10,8 @@ const selectAll = (callback) => {
   });
 };
 
-const addMove = (callback) => {
-  Item.save({}, (err, items) => {
+const selectOne = (callback) => {
+  Item.findById({}, (err, items) => {
     if(err) {
       callback(err, null);
     } else {
@@ -20,7 +20,19 @@ const addMove = (callback) => {
   });
 };
 
+const addMove = (callback) => {
+  let move = new Item(req.body);
+  move.save()
+    .then((move) => {
+      res.status(201).json({'move': 'move added successfully'});
+    })
+    .catch((err) => {
+      res.status(400).send('adding new move failed');
+    });
+};
+
 module.exports = {
   addMove,
   selectAll,
+  selectOne,
 };
