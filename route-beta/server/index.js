@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const { findAll, addMove } = require('./database/controllers');
+const { selectAll, addMove } = require('./database/controllers');
 const app = express();
 
 app.use(cors());
