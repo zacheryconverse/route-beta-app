@@ -3,16 +3,26 @@ import ListItem from './ListItem.jsx';
 
 const List = (props) => {
   const [ state, setState ] = useState({
-    move: '',
-    password: '',
+    move: [],
   })
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setState(prevState => ({
       ...prevState,
-      [id]: value
+      [id]: [value]
     }))
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    sendMoveToServer();
+  }
+
+  const sendMoveToServer = () => {
+    if (state.move.length) {
+      fetch('/list', ("move":state.move))
+    }
   }
 
   return (

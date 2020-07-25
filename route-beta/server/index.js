@@ -15,8 +15,18 @@ app.use(express.static('public'));
 //   ]);
 // });
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
+app.get('/items', (req, res) => {
+  items.selectAll((err, data) => {
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+app.post('/list', (req, res) => {
+  addMove((err, data) => {
     if(err) {
       res.sendStatus(500);
     } else {
