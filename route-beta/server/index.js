@@ -1,9 +1,12 @@
-var express = require('express');
-var bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-var items = require('./database/index');
+const { findAll, addMove } = require('./database/controllers');
+const app = express();
 
-var app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 // app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(express.static('public'));
@@ -16,7 +19,7 @@ app.use(express.static('public'));
 // });
 
 app.get('/items', (req, res) => {
-  items.selectAll((err, data) => {
+  selectAll((err, data) => {
     if(err) {
       res.sendStatus(500);
     } else {
