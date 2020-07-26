@@ -1,6 +1,11 @@
 {
   "name": "route-beta",
   "version": "0.1.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacheryconverse/route-beta-app.git"
+  },
   "dependencies": {
     "@popperjs/core": "^2.4.4",
     "@testing-library/jest-dom": "^4.2.4",
