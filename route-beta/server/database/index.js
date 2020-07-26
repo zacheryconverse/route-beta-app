@@ -1,34 +1,29 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
+
+mongoose.connect('mongodb://localhost/beta', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', () => {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
+db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+const ItemSchema = new Schema({
+  moveId: Number,
+  move: String,
 });
 
-var Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', ItemSchema);
 
-var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
-    if(err) {
-      callback(err, null);
-    } else {
-      callback(null, items);
-    }
-  });
+module.exports = {
+  Item,
 };
-
-module.exports.selectAll = selectAll;

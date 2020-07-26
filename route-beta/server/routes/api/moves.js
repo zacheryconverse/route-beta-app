@@ -1,28 +1,34 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const moves = require('./routes/api/moves');
 
 const router = express.Router();
-const { Item } = require('./database/index');
-const { selectAll, addMove } = require('./database/controllers');
 
-const app = express();
+const { Item } = require('../../database/index');
 
-app.use(cors());
-app.use(bodyParser.json());
+router.get('/', (req, res) => {
+  Item.find()
+    .then((moves) => res.json(moves));
+});
 
-app.use(express.static('public'));
+router.post('/', (req, res) => {
+  const newMove = new Item({
+    moveId: req.body.moveId,
+    move: req.body.move,
+  });
 
-const port = process.env.PORT || 3001;
+  newMove
+    .save()
+    .then((move) => res.json(move));
+});
 
-// router.get('/items', (req, res) => {
-//   res.json([
-//     {id: 1, username: 'somebody'},
-//     {id: 2, username: 'somebody-else'}
-//   ]);
-// });
+router.delete('/:id', (req, res) => {
+  Item.findById(req.params.id)
+    .then((move) => move.remove().then(() => res.json({
+      success: true,
+    })))
+    .catch(() => res.status(404).json({
+      success: false,
+    }));
+});
 
 // app.get('/', (req, res) => {
 //   selectAll((err, data) => {
@@ -62,8 +68,4 @@ const port = process.env.PORT || 3001;
 //   }
 // });
 
-app.use('/api/moves', moves);
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
+module.exports = router;
