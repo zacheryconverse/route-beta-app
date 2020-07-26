@@ -7,15 +7,18 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Container
+  Container,
 } from 'reactstrap';
 
 class NavBar extends Component {
-  state = {
-    isOpen: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    }
   }
 
-  toggle = () => {
+  const toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -23,27 +26,29 @@ class NavBar extends Component {
 
   render() {
     return (
-    <div>
-      <NavBar
-        color="dark"
-        dark expand="sm"
-        className="mb=5">
-        <Container>
-          <NavbarBrand href="/">Route Beta</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="http://github.com/zacheryconverse">
-                  Github
-                </NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Container>
-      </NavBar>
-    </div>
-    )
+      <div>
+        <NavBar
+          color="dark"
+          dark
+          expand="sm"
+          className="mb=5"
+        >
+          <Container>
+            <NavbarBrand href="/">Route Beta</NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  <NavLink href="http://github.com/zacheryconverse">
+                    Github
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </Collapse>
+          </Container>
+        </NavBar>
+      </div>
+    );
   }
 }
 
