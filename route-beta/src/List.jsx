@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import ListItem from './ListItem.jsx';
+import ListItem from './ListItem';
 
-const List = (props) => {
-  const [ state, setState ] = useState({
+const List = ({ items }) => {
+  const [state, setState] = useState({
     move: [],
-  })
+  });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setState(prevState => ({
+    setState((prevState) => ({
       ...prevState,
-      [id]: [value]
-    }))
-  }
+      [id]: [value],
+    }));
+  };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    sendMoveToServer();
-  }
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   sendMoveToServer();
+  // }
 
-  const sendMoveToServer = () => {
-    if (state.move.length) {
-      fetch('/moves', ("move": state.move))
-    }
-  }
+  // const sendMoveToServer = () => {
+  //   if (state.move.length) {
+  //     fetch('/moves', ("move": state.move))
+  //   }
+  // }
 
   return (
     <div>
@@ -44,10 +44,16 @@ const List = (props) => {
           Enter
         </button>
       </form>
-      This route has { props.items.length } moves.
-      { props.items.map(item => <ListItem item={item}/>)}
+      This route has
+      {' '}
+      {items.length}
+      {' '}
+      moves.
+      {items.map((item) => (
+        <ListItem item={item} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default List;

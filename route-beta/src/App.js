@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
 import Header from './Header';
 import List from './List';
 
@@ -29,6 +30,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        {/* <NavBar /> */}
         <Header />
         <header className="App-header">
           <List items={this.state.items} />
