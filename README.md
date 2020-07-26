@@ -1,4 +1,4 @@
-# route-beta-app
+# Route Beta
 Route Beta makes it possible to remember and share the details of any climb.
 
 ## Available Scripts
