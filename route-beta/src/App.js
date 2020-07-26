@@ -30,8 +30,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        {/* <NavBar /> */}
-        <Header />
+        {/* <Header /> */}
+        <NavBar />
         <header className="App-header">
           <List items={this.state.items} />
           <img src={logo} className="App-logo" alt="logo" />

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Collapse,
   Navbar,
@@ -8,42 +8,35 @@ import {
   NavItem,
   NavLink,
   Container,
-} from 'reactstrap';
+} from "reactstrap";
 
 class NavBar extends Component {
-    state = {
-      isOpen: false
-    }
+  state = {
+    isOpen: false,
+  };
 
   toggle = () => {
     this.setState({
-      isOpen: !this.state.isOpen
+      isOpen: !this.state.isOpen,
     });
-  }
+  };
 
   render() {
     return (
       <div>
-        <NavBar
-          color="dark"
-          dark
-          expand="sm"
-          className="mb=5"
-        >
+        <Navbar color="dark" dark expand="sm" className="mb=5">
           <Container>
             <NavbarBrand href="/">Route Beta</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="http://github.com/zacheryconverse">
-                    Github
-                  </NavLink>
+                  <NavLink href="https://www.mountainproject.com/">Mountain Project</NavLink>
                 </NavItem>
               </Nav>
             </Collapse>
           </Container>
-        </NavBar>
+        </Navbar>
       </div>
     );
   }
