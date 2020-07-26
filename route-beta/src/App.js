@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar';
-import Header from './Header';
-import List from './List';
+// import Header from './Header';
+import List from './components/List';
 
 class App extends React.Component {
   constructor(props) {

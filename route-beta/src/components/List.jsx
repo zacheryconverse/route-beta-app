@@ -3,7 +3,9 @@ import ListItem from './ListItem';
 
 const List = ({ items }) => {
   const [state, setState] = useState({
-    move: [],
+    moves: [
+      // { id: }
+    ],
   });
 
   const handleChange = (e) => {
@@ -20,8 +22,8 @@ const List = ({ items }) => {
   }
 
   const sendMoveToServer = () => {
-    if (state.move.length) {
-      fetch('/api/moves', ("move": state.move))
+    if (state.moves.length) {
+      fetch('/api/moves', ("moves": state.moves))
     }
   }
 
