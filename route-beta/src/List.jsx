@@ -14,16 +14,16 @@ const List = ({ items }) => {
     }));
   };
 
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   sendMoveToServer();
-  // }
+  const handleClick = (e) => {
+    e.preventDefault();
+    sendMoveToServer();
+  }
 
-  // const sendMoveToServer = () => {
-  //   if (state.move.length) {
-  //     fetch('/moves', ("move": state.move))
-  //   }
-  // }
+  const sendMoveToServer = () => {
+    if (state.move.length) {
+      fetch('/api/moves', ("move": state.move))
+    }
+  }
 
   return (
     <div>

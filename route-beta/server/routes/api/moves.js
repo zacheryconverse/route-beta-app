@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const newMove = new Item({
+    moveId: req.body.moveId,
     move: req.body.move,
   });
 

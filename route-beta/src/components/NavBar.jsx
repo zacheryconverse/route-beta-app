@@ -11,14 +11,11 @@ import {
 } from 'reactstrap';
 
 class NavBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    state = {
       isOpen: false
     }
-  }
 
-  const toggle = () => {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
