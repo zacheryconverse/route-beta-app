@@ -5,7 +5,7 @@
   "editor.snippetSuggestions": "inline",
   "editor.tabSize": 2,
   "editor.wordWrap": "on",
-  "emmet.showExpandedAbbreviation": "always",
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
   "files.trimTrailingWhitespace": true,
   "javascript.suggest.enabled": false,
   "javascript.updateImportsOnFileMove.enabled": "prompt",

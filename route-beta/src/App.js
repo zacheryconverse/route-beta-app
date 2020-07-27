@@ -5,8 +5,9 @@ import './App.css';
 import NavBar from './components/NavBar';
 // import Header from './Header';
 import List from './components/List';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,10 +33,10 @@ class App extends React.Component {
       <div className="App">
         {/* <Header /> */}
         <NavBar />
-        <header className="App-header">
+        <div className="App-body">
           <List items={this.state.items} />
           <img src={logo} className="App-logo" alt="logo" />
-        </header>
+        </div>
       </div>
     );
   }
