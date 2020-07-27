@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import NavBar from './components/NavBar';
-import Header from './Header';
-import List from './List';
+// import Header from './Header';
+import List from './components/List';
+import { Provider } from 'react-redux';
+import store from './store';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,14 +31,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        {/* <Header /> */}
-        <NavBar />
-        <header className="App-header">
-          <List items={this.state.items} />
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          {/* <Header /> */}
+          <NavBar />
+          <div className="App-body">
+            <List items={this.state.items} />
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
+        </div>
+      </Provider>
     );
   }
 }
