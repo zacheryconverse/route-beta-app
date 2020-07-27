@@ -7,6 +7,8 @@ import NavBar from './components/NavBar';
 import List from './components/List';
 import { Provider } from 'react-redux';
 import store from './store';
+import ItemModal from './components/ItemModal'
+import { Container } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
@@ -16,18 +18,18 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/api/moves')
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({
-          items: data,
-        });
-      })
-      .catch((err) => {
-        console.log('err', err);
-      });
-  }
+  // componentDidMount() {
+  //   fetch('/api/moves')
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       this.setState({
+  //         items: data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log('err', err);
+  //     });
+  // }
 
   render() {
     return (
@@ -36,8 +38,11 @@ class App extends Component {
           {/* <Header /> */}
           <NavBar />
           <div className="App-body">
-            <List items={this.state.items} />
-            <img src={logo} className="App-logo" alt="logo" />
+            <Container>
+              <ItemModal />
+              <List items={this.state.items} />
+              <img src={logo} className="App-logo" alt="logo" />
+            </Container>
           </div>
         </div>
       </Provider>

@@ -25,7 +25,7 @@ class List extends Component {
     const { items } = this.props.item;
     return (
       <Container>
-        <Button
+        {/* <Button
           color="dark"
           style={{ marginBottom: '2rem', marginTop: '2rem' }}
           onClick={() => {
@@ -38,7 +38,7 @@ class List extends Component {
           }}
         >
           Add a Move
-        </Button>
+        </Button> */}
 
         <ListGroup>
           This route has {items.length} moves.
