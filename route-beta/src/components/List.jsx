@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 // import ListItem from './ListItem';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import uuid from 'uuid';
 import { connect } from 'react-redux';
-import { getItems } from '../actions/itemActions';
+import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
+import uuid from 'uuid';
 
 // const List = ({ items }) => {
 //   const [state, setState] = useState({
@@ -15,6 +15,10 @@ import PropTypes from 'prop-types';
 class List extends Component {
   componentDidMount() {
     this.props.getItems();
+  }
+
+  onDeleteClick = (id) => {
+    this.props.deleteItem(id);
   }
 
   render() {
@@ -37,6 +41,7 @@ class List extends Component {
         </Button>
 
         <ListGroup>
+          This route has {items.length} moves.
           {items.map(({ id, name }) => (
             <ListGroupItem key={id}>
               <Button
@@ -54,11 +59,7 @@ class List extends Component {
                 className="remove-btn"
                 color="warning"
                 size="sm"
-                onClick={() => {
-                  this.setState((state) => ({
-                    items: state.items.filter((move) => move.id !== id),
-                  }));
-                }}
+                onClick={this.onDeleteClick.bind(this, id)}
               >
                 &times;
               </Button>
@@ -69,6 +70,17 @@ class List extends Component {
     );
   }
 }
+
+List.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  item: state.item,
+});
+
+export default connect(mapStateToProps, { getItems, deleteItem })(List);
 
 //   const handleChange = (e) => {
 //     const { id, value } = e.target;
@@ -108,25 +120,14 @@ class List extends Component {
 //           Enter
 //         </button>
 //       </form>
-//       This route has
-//       {' '}
-//       {items.length}
-//       {' '}
-//       moves.
+// This route has
+// {' '}
+// {items.length}
+// {' '}
+// moves.
 //       {items.map((item) => (
 //         <ListItem item={item} />
 //       ))}
 //     </div>
 //   );
 // };
-
-List.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  item: state.item,
-});
-
-export default connect(mapStateToProps, { getItems })(List);
