@@ -17,6 +17,12 @@ app.use(express.static('public'));
 
 const port = process.env.PORT || 3001;
 
+app.use('/api/moves', moves);
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
+
 // router.get('/items', (req, res) => {
 //   res.json([
 //     {id: 1, username: 'somebody'},
@@ -61,9 +67,3 @@ const port = process.env.PORT || 3001;
 //     res.status(400).send('adding new move failed');
 //   }
 // });
-
-app.use('/api/moves', moves);
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});

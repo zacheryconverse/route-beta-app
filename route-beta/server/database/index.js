@@ -19,7 +19,8 @@ db.once('open', () => {
 
 const ItemSchema = new Schema({
   moveId: Number,
-  move: String,
+  id: Number,
+  name: String,
 });
 
 const Item = mongoose.model('Item', ItemSchema);
