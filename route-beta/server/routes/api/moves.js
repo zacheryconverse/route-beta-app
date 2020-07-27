@@ -6,13 +6,15 @@ const { Item } = require('../../database/index');
 
 router.get('/', (req, res) => {
   Item.find()
+    // .sort({ moveId: -1 })
     .then((moves) => res.json(moves));
 });
 
 router.post('/', (req, res) => {
   const newMove = new Item({
     moveId: req.body.moveId,
-    move: req.body.move,
+    id: req.body.id,
+    name: req.body.name,
   });
 
   newMove

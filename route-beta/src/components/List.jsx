@@ -5,7 +5,6 @@ import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import uuid from 'uuid';
 
 // const List = ({ items }) => {
 //   const [state, setState] = useState({
@@ -25,7 +24,7 @@ class List extends Component {
     const { items } = this.props.item;
     return (
       <Container>
-        <Button
+        {/* <Button
           color="dark"
           style={{ marginBottom: '2rem', marginTop: '2rem' }}
           onClick={() => {
@@ -38,12 +37,12 @@ class List extends Component {
           }}
         >
           Add a Move
-        </Button>
+        </Button> */}
 
         <ListGroup>
           This route has {items.length} moves.
-          {items.map(({ id, name }) => (
-            <ListGroupItem key={id}>
+          {items.map(({ _id, name }) => (
+            <ListGroupItem key={_id}>
               <Button
                 className="edit-btn"
                 color="secondary"
@@ -59,7 +58,7 @@ class List extends Component {
                 className="remove-btn"
                 color="warning"
                 size="sm"
-                onClick={this.onDeleteClick.bind(this, id)}
+                onClick={this.onDeleteClick.bind(this, _id)}
               >
                 &times;
               </Button>

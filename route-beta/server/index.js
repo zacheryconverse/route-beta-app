@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const moves = require('./routes/api/moves');
 
@@ -15,7 +16,23 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
-const port = process.env.PORT || 3001;
+// Serve static assets of in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('build'));
+  // Serve index.html for any unknown paths
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+}
+
+const port = process.env.PORT || 5000;
+
+app.use('/api/moves', moves);
+
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
 
 // router.get('/items', (req, res) => {
 //   res.json([
@@ -61,9 +78,3 @@ const port = process.env.PORT || 3001;
 //     res.status(400).send('adding new move failed');
 //   }
 // });
-
-app.use('/api/moves', moves);
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}`);
-});
