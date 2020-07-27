@@ -5,7 +5,6 @@ import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types';
-import uuid from 'uuid';
 
 // const List = ({ items }) => {
 //   const [state, setState] = useState({
