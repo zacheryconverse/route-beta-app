@@ -1,20 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 const path = require('path');
 
 const moves = require('./routes/api/moves');
 
-const router = express.Router();
-const { Item } = require('./database/index');
-const { selectAll, addMove } = require('./database/controllers');
+// const router = express.Router();
+// const { Item } = require('./database/index');
+// const { selectAll, addMove } = require('./database/controllers');
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(bodyParser.json());
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
+
+app.use('/api/moves', moves);
 
 // Serve static assets of in production
 if (process.env.NODE_ENV === 'production') {
@@ -27,8 +29,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const port = process.env.PORT || 5000;
-
-app.use('/api/moves', moves);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);

@@ -17,20 +17,26 @@ router.post('/', (req, res) => {
     name: req.body.name,
   });
 
-  newMove
-    .save()
-    .then((move) => res.json(move));
+  newMove.save().then((move) => res.json(move));
 });
 
 router.delete('/:id', (req, res) => {
   Item.findById(req.params.id)
-    .then((move) => move.remove().then(() => res.json({
-      success: true,
-    })))
-    .catch(() => res.status(404).json({
-      success: false,
-    }));
+    .then((move) =>
+      move.remove().then(() =>
+        res.json({
+          success: true,
+        })
+      )
+    )
+    .catch(() =>
+      res.status(404).json({
+        success: false,
+      })
+    );
 });
+
+module.exports = router;
 
 // app.get('/', (req, res) => {
 //   selectAll((err, data) => {
@@ -69,5 +75,3 @@ router.delete('/:id', (req, res) => {
 //     res.status(400).send('adding new move failed');
 //   }
 // });
-
-module.exports = router;
