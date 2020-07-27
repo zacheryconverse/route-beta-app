@@ -42,8 +42,8 @@ class List extends Component {
 
         <ListGroup>
           This route has {items.length} moves.
-          {items.map(({ id, name }) => (
-            <ListGroupItem key={id}>
+          {items.map(({ _id, name }) => (
+            <ListGroupItem key={_id}>
               <Button
                 className="edit-btn"
                 color="secondary"
@@ -59,7 +59,7 @@ class List extends Component {
                 className="remove-btn"
                 color="warning"
                 size="sm"
-                onClick={this.onDeleteClick.bind(this, id)}
+                onClick={this.onDeleteClick.bind(this, _id)}
               >
                 &times;
               </Button>
