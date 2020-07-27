@@ -5,7 +5,8 @@ import './App.css';
 import NavBar from './components/NavBar';
 // import Header from './Header';
 import List from './components/List';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -30,14 +31,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        {/* <Header /> */}
-        <NavBar />
-        <div className="App-body">
-          <List items={this.state.items} />
-          <img src={logo} className="App-logo" alt="logo" />
+      <Provider store={store}>
+        <div className="App">
+          {/* <Header /> */}
+          <NavBar />
+          <div className="App-body">
+            <List items={this.state.items} />
+            <img src={logo} className="App-logo" alt="logo" />
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }

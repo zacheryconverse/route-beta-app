@@ -3,6 +3,9 @@ import React, { Component } from 'react';
 // import ListItem from './ListItem';
 import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
 import uuid from 'uuid';
+import { connect } from 'react-redux';
+import { getItems } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 // const List = ({ items }) => {
 //   const [state, setState] = useState({
@@ -10,17 +13,12 @@ import uuid from 'uuid';
 //   });
 
 class List extends Component {
-  state = {
-    moves: [
-      { id: uuid(), name: 'left sidepull' },
-      { id: uuid(), name: 'right crimp' },
-      { id: uuid(), name: 'bump right to jug' },
-      { id: uuid(), name: 'match' },
-    ],
-  };
+  componentDidMount() {
+    this.props.getItems();
+  }
 
   render() {
-    const { moves } = this.state;
+    const { items } = this.props.item;
     return (
       <Container>
         <Button
@@ -30,7 +28,7 @@ class List extends Component {
             const name = prompt('Enter Move');
             if (name) {
               this.setState((state) => ({
-                moves: [...state.moves, { id: uuid(), name }],
+                items: [...state.items, { id: uuid(), name }],
               }));
             }
           }}
@@ -39,34 +37,33 @@ class List extends Component {
         </Button>
 
         <ListGroup>
-            {moves.map(({ id, name }) => (
-
-                <ListGroupItem key={id}>
-                  <Button
-                    className="edit-btn"
-                    color="info"
-                    size="sm"
-                    onClick={() => {
-                      this.setState((state) => ({}));
-                    }}
-                  >
-                    -
-                  </Button>
-                  {name}
-                  <Button
-                    className="remove-btn"
-                    color="warning"
-                    size="sm"
-                    onClick={() => {
-                      this.setState((state) => ({
-                        moves: state.moves.filter(move => move.id !== id)
-                      }));
-                    }}
-                  >
-                    &times;
-                  </Button>
-                </ListGroupItem>
-            ))}
+          {items.map(({ id, name }) => (
+            <ListGroupItem key={id}>
+              <Button
+                className="edit-btn"
+                color="secondary"
+                size="sm"
+                onClick={() => {
+                  this.setState((state) => ({}));
+                }}
+              >
+                -
+              </Button>
+              {name}
+              <Button
+                className="remove-btn"
+                color="warning"
+                size="sm"
+                onClick={() => {
+                  this.setState((state) => ({
+                    items: state.items.filter((move) => move.id !== id),
+                  }));
+                }}
+              >
+                &times;
+              </Button>
+            </ListGroupItem>
+          ))}
         </ListGroup>
       </Container>
     );
@@ -123,4 +120,13 @@ class List extends Component {
 //   );
 // };
 
-export default List;
+List.propTypes = {
+  getItems: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  item: state.item,
+});
+
+export default connect(mapStateToProps, { getItems })(List);
