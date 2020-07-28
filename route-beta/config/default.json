@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://zacheryconverse:tazojBB1%21%21@routebeta.ilkih.mongodb.net/rbeta?retryWrites=true&w=majority",
+  "jwtSecret": "rbetaMyJwtSecret"
+}
