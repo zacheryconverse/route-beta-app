@@ -1,22 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 // const cors = require('cors');
 const path = require('path');
-
-const moves = require('./routes/api/moves');
-
-// const router = express.Router();
-// const { Item } = require('./database/index');
-// const { selectAll, addMove } = require('./database/controllers');
 
 const app = express();
 
 // app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // app.use(express.static('public'));
 
-app.use('/api/moves', moves);
+app.use('/api/moves', require('./routes/api/moves'));
+app.use('/api/users', require('./routes/api/users'));
 
 // Serve static assets of in production
 if (process.env.NODE_ENV === 'production') {
@@ -27,12 +21,16 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
   });
 }
-
+// Heroku - environmental variable
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
+
+// const router = express.Router();
+// const { Item } = require('./database/index');
+// const { selectAll, addMove } = require('./database/controllers');
 
 // router.get('/items', (req, res) => {
 //   res.json([
