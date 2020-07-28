@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-mongoose.connect('mongodb://localhost/beta', {
+const URI = require('../../config/keys').mongoURI;
+
+// mongoose.connect('mongodb://localhost/beta', {
+mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 const db = mongoose.connection;
@@ -21,6 +25,10 @@ const ItemSchema = new Schema({
   moveId: Number,
   id: Number,
   name: String,
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Item = mongoose.model('Item', ItemSchema);
