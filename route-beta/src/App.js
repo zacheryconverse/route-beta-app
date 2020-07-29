@@ -7,8 +7,9 @@ import NavBar from './components/NavBar';
 import List from './components/List';
 import { Provider } from 'react-redux';
 import store from './store';
-import ItemModal from './components/ItemModal'
+import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
+import { loadUser } from './actions/authActions';
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +19,10 @@ class App extends Component {
     };
   }
 
-  // componentDidMount() {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   //   fetch('/api/moves')
   //     .then((res) => res.json())
   //     .then((data) => {
@@ -29,7 +33,6 @@ class App extends Component {
   //     .catch((err) => {
   //       console.log('err', err);
   //     });
-  // }
 
   render() {
     return (
