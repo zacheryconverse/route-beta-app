@@ -1,7 +1,7 @@
 const express = require('express');
 
 const router = express.Router();
-
+const auth = require('../../middleware/auth');
 const { Item } = require('../../models/Item');
 
 router.get('/', (req, res) => {
@@ -10,7 +10,10 @@ router.get('/', (req, res) => {
     .then((moves) => res.json(moves));
 });
 
-router.post('/', (req, res) => {
+// @route        POST api/auth
+// @description  Authenticate user
+// @access       Private
+router.post('/', auth, (req, res) => {
   const newMove = new Item({
     moveId: req.body.moveId,
     id: req.body.id,
@@ -20,7 +23,10 @@ router.post('/', (req, res) => {
   newMove.save().then((move) => res.json(move));
 });
 
-router.delete('/:id', (req, res) => {
+// @route        DELETE api/moves/:id
+// @description  Delete a move
+// @access       Private
+router.delete('/:id', auth, (req, res) => {
   Item.findById(req.params.id)
     .then((move) =>
       move.remove().then(() =>
