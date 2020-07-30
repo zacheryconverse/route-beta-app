@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Navbar, NavbarBrand, Container, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
 import LoginModal from './auth/LoginModal';
 import Logout from './auth/Logout';
@@ -9,6 +11,10 @@ class NavBar extends Component {
     isOpen: false,
   };
 
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+  };
+
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen,
@@ -16,20 +22,38 @@ class NavBar extends Component {
   };
 
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    const authLinks = (
+      <Fragment>
+        <NavItem>
+          <span className="navbar-text mr-3">
+            <strong>{ user ? `Welcome ${user.name}` : ''}</strong>
+          </span>
+        </NavItem>
+        <Logout />
+      </Fragment>
+    )
+
+    const guestLinks = (
+      <Fragment>
+        <RegisterModal />
+        <LoginModal />
+      </Fragment>
+    );
+
     return (
       <div>
         <Navbar color="dark" dark expand="sm" className="mb=5">
           <Container>
             <NavbarBrand href="/">Route Beta</NavbarBrand>
-            <RegisterModal />
-            <LoginModal />
-            <Logout />
-            <NavbarToggler onClick={this.toggle} />
-            <Collapse isOpen={this.state.isOpen} navbar>
+
+            {/* <NavbarToggler onClick={this.toggle} /> */}
+            {/* <Collapse isOpen={this.state.isOpen} navbar> */}
               <Nav className="ml-auto" navbar>
-                <NavItem></NavItem>
+                { isAuthenticated ? authLinks : guestLinks }
               </Nav>
-            </Collapse>
+            {/* </Collapse> */}
           </Container>
         </Navbar>
       </div>
@@ -37,4 +61,8 @@ class NavBar extends Component {
   }
 }
 
-export default NavBar;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, null)(NavBar);

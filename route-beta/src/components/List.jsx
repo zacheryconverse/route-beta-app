@@ -40,7 +40,9 @@ class List extends Component {
         </Button> */}
 
         <ListGroup>
-          This route has {items.length} moves.
+          <span className="lead">
+            <strong>{ items ? `This route has ${items.length} moves` : ''}</strong>
+          </span>
           {items.map(({ _id, name }) => (
             <ListGroupItem key={_id}>
               <Button
