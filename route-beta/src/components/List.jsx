@@ -12,36 +12,27 @@ import PropTypes from 'prop-types';
 //   });
 
 class List extends Component {
+  static propTypes = {
+    getItems: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
+  };
+
   componentDidMount() {
     this.props.getItems();
   }
 
   onDeleteClick = (id) => {
     this.props.deleteItem(id);
-  }
+  };
 
   render() {
     const { items } = this.props.item;
     return (
       <Container>
-        {/* <Button
-          color="dark"
-          style={{ marginBottom: '2rem', marginTop: '2rem' }}
-          onClick={() => {
-            const name = prompt('Enter Move');
-            if (name) {
-              this.setState((state) => ({
-                items: [...state.items, { id: uuid(), name }],
-              }));
-            }
-          }}
-        >
-          Add a Move
-        </Button> */}
-
         <ListGroup>
           <span className="lead">
-            <strong>{ items ? `This route has ${items.length} moves` : ''}</strong>
+            <strong>{items ? `This route has ${items.length} moves` : ''}</strong>
           </span>
           {items.map(({ _id, name }) => (
             <ListGroupItem key={_id}>
@@ -72,13 +63,9 @@ class List extends Component {
   }
 }
 
-List.propTypes = {
-  getItems: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => ({
   item: state.item,
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getItems, deleteItem })(List);

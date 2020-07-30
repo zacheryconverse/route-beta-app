@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Navbar, NavbarBrand, Container, NavbarToggler, Collapse, Nav, NavItem } from 'reactstrap';
+import { Navbar, NavbarBrand, Container, Nav, NavItem } from 'reactstrap';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RegisterModal from './auth/RegisterModal';
