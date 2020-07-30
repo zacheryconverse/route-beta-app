@@ -6,7 +6,7 @@ const { Item } = require('../../models/Item');
 
 router.get('/', (req, res) => {
   Item.find()
-    // .sort({ moveId: -1 })
+    .sort({ date: -1 })
     .then((moves) => res.json(moves));
 });
 
